@@ -36,7 +36,30 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  pages: {
+    signIn: "/auth/login",
+  },
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
+    authorized: async ({ auth, request }) => {
+      const isLoggedIn = !!auth;
+      const isOnAuth = request.nextUrl.pathname.startsWith("/auth");
+
+      if (isOnAuth) {
+        if (isLoggedIn) {
+          return Response.redirect(new URL("/dashboard", request.url));
+        }
+        return true;
+      }
+
+      if (!isLoggedIn) {
+        return Response.redirect(new URL("/auth/login", request.url));
+      }
+
+      return true;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
@@ -51,11 +74,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return session;
     },
-  },
-  pages: {
-    signIn: "/auth/login",
-  },
-  session: {
-    strategy: "jwt",
   },
 });

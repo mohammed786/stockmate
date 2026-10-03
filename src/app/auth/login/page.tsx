@@ -90,10 +90,6 @@ export default function LoginPage() {
             Sign In
           </button>
         </form>
-
-        <p className="text-center text-xs text-[var(--muted-foreground)] mt-4">
-          Default: admin@stockmate.local / admin123
-        </p>
       </div>
     </div>
   );
