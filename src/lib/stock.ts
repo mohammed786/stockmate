@@ -1,4 +1,5 @@
 import { Decimal } from "@prisma/client/runtime/library";
+import { Prisma } from "@prisma/client";
 import { db } from "./db";
 import { toNum } from "./utils";
 
@@ -211,7 +212,7 @@ export async function getStockMovements(
   startDate?: Date,
   endDate?: Date
 ) {
-  const where: Parameters<typeof db.stockMovement.findMany>[0]["where"] = {
+  const where: Prisma.StockMovementWhereInput = {
     productId,
   };
   if (startDate || endDate) {

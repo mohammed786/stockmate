@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { Prisma } from "@prisma/client";
 import { saleSchema, type SaleInput } from "@/lib/validations";
 import { toNum } from "@/lib/utils";
 import { validateSufficientStock } from "@/lib/stock";
@@ -77,7 +78,7 @@ export async function createSale(data: SaleInput) {
 }
 
 export async function getSales(startDate?: Date, endDate?: Date, companyId?: string) {
-  const where: Parameters<typeof db.sale.findMany>[0]["where"] = {};
+  const where: Prisma.SaleWhereInput = {};
   if (startDate || endDate) {
     where.date = {};
     if (startDate) where.date.gte = startDate;
@@ -131,7 +132,7 @@ export async function deleteSale(id: string) {
 }
 
 export async function getSaleSummary(startDate?: Date, endDate?: Date) {
-  const where: Parameters<typeof db.sale.findMany>[0]["where"] = {};
+  const where: Prisma.SaleWhereInput = {};
   if (startDate || endDate) {
     where.date = {};
     if (startDate) where.date.gte = startDate;

@@ -81,8 +81,8 @@ export default async function SaleDetailPage({
                     <td className="px-4 py-3 text-[var(--muted-foreground)]">{idx + 1}</td>
                     <td className="px-4 py-3 font-medium">{item.product.name}</td>
                     <td className="px-4 py-3 text-[var(--muted-foreground)]">{item.product.company.code}</td>
-                    <td className="px-4 py-3 text-right font-mono">{formatNumber(item.sheets, 0)}</td>
-                    <td className="px-4 py-3 text-right font-mono">{formatNumber(item.cases, 0)}</td>
+                    <td className="px-4 py-3 text-right font-mono">{formatNumber(toNum(item.sheets), 0)}</td>
+                    <td className="px-4 py-3 text-right font-mono">{formatNumber(toNum(item.cases), 0)}</td>
                     <td className="px-4 py-3 text-right font-mono">{formatNumber(sqmt)}</td>
                   </tr>
                 );

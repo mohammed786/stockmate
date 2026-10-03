@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { Prisma } from "@prisma/client";
 import { productSchema, type ProductInput } from "@/lib/validations";
 import { generateProductCode, toNum } from "@/lib/utils";
 import { calculateSQMT, calculateSQMTRate } from "@/lib/stock";
@@ -57,9 +58,7 @@ export async function updateProduct(id: string, data: ProductInput) {
 }
 
 export async function getProducts(companyId?: string) {
-  const where: Parameters<typeof db.product.findMany>[0]["where"] = {
-    isActive: true,
-  };
+  const where: Prisma.ProductWhereInput = { isActive: true };
   if (companyId) where.companyId = companyId;
 
   return db.product.findMany({
@@ -77,7 +76,7 @@ export async function getProductById(id: string) {
 }
 
 export async function searchProducts(query: string, companyId?: string) {
-  const where: Parameters<typeof db.product.findMany>[0]["where"] = {
+  const where: Prisma.ProductWhereInput = {
     isActive: true,
     OR: [
       { name: { contains: query, mode: "insensitive" } },

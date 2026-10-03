@@ -97,10 +97,10 @@ export default async function PurchaseDetailPage({
                         {item.product.company.code}
                       </td>
                       <td className="px-4 py-3 text-right font-mono">
-                        {formatNumber(item.sheets, 0)}
+                        {formatNumber(toNum(item.sheets), 0)}
                       </td>
                       <td className="px-4 py-3 text-right font-mono">
-                        {formatNumber(item.cases, 0)}
+                        {formatNumber(toNum(item.cases), 0)}
                       </td>
                       <td className="px-4 py-3 text-right font-mono">{formatNumber(sqmt)}</td>
                     </tr>

@@ -80,8 +80,8 @@ export default async function SettingsProductsPage() {
                         {toNum(p.height)}×{toNum(p.width)}cm
                       </td>
                       <td className="px-4 py-2 text-right font-mono">{toNum(p.thickness)}mm</td>
-                      <td className="px-4 py-2 text-right font-mono">{formatNumber(p.mtrRate)}</td>
-                      <td className="px-4 py-2 text-right font-mono">{formatNumber(p.sqmtRate)}</td>
+                      <td className="px-4 py-2 text-right font-mono">{formatNumber(toNum(p.mtrRate))}</td>
+                      <td className="px-4 py-2 text-right font-mono">{formatNumber(toNum(p.sqmtRate))}</td>
                     </tr>
                   ))
                 )}

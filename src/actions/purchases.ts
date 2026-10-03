@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { Prisma } from "@prisma/client";
 import { purchaseSchema, type PurchaseInput } from "@/lib/validations";
 import { toNum } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
@@ -59,7 +60,7 @@ export async function createPurchase(data: PurchaseInput) {
 }
 
 export async function getPurchases(startDate?: Date, endDate?: Date, companyId?: string) {
-  const where: Parameters<typeof db.purchase.findMany>[0]["where"] = {};
+  const where: Prisma.PurchaseWhereInput = {};
   if (startDate || endDate) {
     where.date = {};
     if (startDate) where.date.gte = startDate;
@@ -115,7 +116,7 @@ export async function deletePurchase(id: string) {
 }
 
 export async function getPurchaseSummary(startDate?: Date, endDate?: Date) {
-  const where: Parameters<typeof db.purchase.findMany>[0]["where"] = {};
+  const where: Prisma.PurchaseWhereInput = {};
   if (startDate || endDate) {
     where.date = {};
     if (startDate) where.date.gte = startDate;
