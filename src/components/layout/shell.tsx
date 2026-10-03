@@ -12,7 +12,9 @@ import {
   Settings,
   Menu,
   X,
+  LogOut,
 } from "lucide-react";
+import { signOut } from "next-auth/react";
 import { useState, type ReactNode } from "react";
 
 const navItems = [
@@ -58,6 +60,15 @@ export function Shell({ children }: { children: ReactNode }) {
             </Link>
           ))}
         </nav>
+        <div className="p-3 border-t border-[var(--border)]">
+          <button
+            onClick={() => signOut({ callbackUrl: "/auth/login" })}
+            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--muted-foreground)] hover:bg-[var(--accent)] hover:text-[var(--foreground)]"
+          >
+            <LogOut className="h-5 w-5" />
+            Sign Out
+          </button>
+        </div>
       </aside>
 
       {/* Mobile sidebar overlay */}
@@ -102,6 +113,18 @@ export function Shell({ children }: { children: ReactNode }) {
             </Link>
           ))}
         </nav>
+        <div className="absolute bottom-0 left-0 right-0 p-3 border-t border-[var(--border)]">
+          <button
+            onClick={() => {
+              setSidebarOpen(false);
+              signOut({ callbackUrl: "/auth/login" });
+            }}
+            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--muted-foreground)] hover:bg-[var(--accent)] hover:text-[var(--foreground)]"
+          >
+            <LogOut className="h-5 w-5" />
+            Sign Out
+          </button>
+        </div>
       </aside>
 
       {/* Main content */}

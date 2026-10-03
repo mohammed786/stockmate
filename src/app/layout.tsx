@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { Providers } from "@/components/layout/providers";
 
 export const metadata: Metadata = {
   title: "StockMate — Inventory Management",
@@ -30,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-[var(--background)]">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
